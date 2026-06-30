@@ -2460,99 +2460,461 @@
   </div>
 </div>
 
+<style>
+/* ── QUIZ FUNNEL ── */
+.quiz-wrap {
+  background: var(--gray-light);
+  border-top: 1px solid var(--gray-border);
+  border-bottom: 1px solid var(--gray-border);
+  padding: 64px 24px;
+}
+.quiz-card {
+  max-width: 660px;
+  margin: 0 auto;
+  background: var(--white);
+  border: 1px solid var(--gray-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+}
+.quiz-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.quiz-progress-track {
+  height: 5px;
+  background: var(--gray-border);
+}
+.quiz-progress-fill {
+  height: 100%;
+  background: var(--green);
+  transition: width 0.4s ease;
+  width: 0%;
+}
+.quiz-step { display: none; }
+.quiz-step.active { display: block; }
+.quiz-body { padding: 28px 28px 24px; }
+.quiz-q {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 22px;
+  line-height: 1.3;
+}
+/* Step 1 – service cards */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.service-card {
+  border: 2px solid var(--gray-border);
+  border-radius: 14px;
+  padding: 26px 12px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .15s, background .15s, transform .12s;
+  background: var(--white);
+  user-select: none;
+}
+.service-card:hover {
+  border-color: var(--blue);
+  background: var(--blue-light);
+  transform: translateY(-2px);
+}
+.service-card.selected {
+  border-color: var(--blue);
+  background: var(--blue-light);
+}
+.service-icon {
+  font-size: 42px;
+  display: block;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.service-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+}
+/* Step 2 – pill buttons */
+.pill-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.quiz-pill {
+  border: 2px solid var(--gray-border);
+  border-radius: 50px;
+  padding: 15px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark);
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color .15s, background .15s, color .15s;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+.quiz-pill:hover, .quiz-pill.selected {
+  border-color: var(--blue);
+  background: var(--blue-light);
+  color: var(--blue);
+}
+/* Steps 3-4 – option list */
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.quiz-option {
+  border: 2px solid var(--gray-border);
+  border-radius: 12px;
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark);
+  background: var(--white);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .15s, background .15s, color .15s;
+  font-family: 'Inter', sans-serif;
+}
+.quiz-option:hover, .quiz-option.selected {
+  border-color: var(--blue);
+  background: var(--blue-light);
+  color: var(--blue);
+}
+/* Back link */
+.quiz-back-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--gray);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  padding: 0;
+}
+.quiz-back-link:hover { color: var(--dark); }
+/* Step 5 – zip */
+.quiz-zip-input {
+  width: 100%;
+  border: 2px solid var(--gray-border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  margin-bottom: 12px;
+  transition: border-color .15s;
+  letter-spacing: 4px;
+}
+.quiz-zip-input:focus { border-color: var(--blue); }
+.quiz-zip-input.error { border-color: #EF4444; }
+.quiz-owner-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+.quiz-owner-check input { cursor: pointer; width: 15px; height: 15px; flex-shrink: 0; }
+.quiz-owner-check label { cursor: pointer; }
+/* CTA button */
+.quiz-cta {
+  width: 100%;
+  padding: 16px;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 6px;
+}
+.quiz-cta:hover { background: var(--blue-dark); }
+.quiz-cta:active { transform: scale(0.99); }
+.quiz-note {
+  text-align: center;
+  font-size: 12px;
+  color: var(--gray);
+}
+/* Step 6 – contact split */
+.quiz-split {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 440px;
+}
+.quiz-split-left {
+  background: #1F2937;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.quiz-check-circle {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  border: 3px solid var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+.quiz-split-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.quiz-split-sub {
+  font-size: 14px;
+  color: #9CA3AF;
+  line-height: 1.5;
+}
+.quiz-split-right { padding: 28px 28px 24px; }
+.quiz-contact-header {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--gray-border);
+  padding-bottom: 16px;
+}
+.quiz-contact-header .arrow { color: var(--green); font-size: 18px; }
+.quiz-field { margin-bottom: 14px; }
+.quiz-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.privacy-note {
+  font-weight: 400;
+  font-size: 10.5px;
+  color: var(--gray);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 5px;
+}
+.quiz-field input {
+  width: 100%;
+  border: 1.5px solid var(--gray-border);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: var(--dark);
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color .15s;
+}
+.quiz-field input:focus { border-color: var(--blue); }
+.quiz-tcpa {
+  font-size: 10px;
+  color: var(--gray);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+.quiz-tcpa a { color: var(--blue); }
+.quiz-trust {
+  text-align: center;
+  font-size: 11px;
+  color: var(--gray);
+  margin-top: 8px;
+}
+/* Step 7 – thank you */
+.quiz-thankyou {
+  padding: 56px 24px;
+  text-align: center;
+}
+.quiz-thankyou-icon {
+  width: 72px;
+  height: 72px;
+  background: var(--green-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+/* Mobile */
+@media (max-width: 600px) {
+  .quiz-wrap { padding: 36px 12px; }
+  .quiz-body { padding: 20px 16px 18px; }
+  .quiz-progress-header { padding: 14px 16px 8px; }
+  .quiz-q { font-size: 16px; }
+  .service-grid { gap: 10px; }
+  .service-card { padding: 18px 8px 14px; }
+  .service-icon { font-size: 30px; }
+  .service-label { font-size: 13px; }
+  .quiz-split { grid-template-columns: 1fr; }
+  .quiz-split-left { padding: 28px 20px; min-height: 0; }
+  .quiz-split-right { padding: 20px 16px 18px; }
+}
+</style>
+
 <!-- CALCULATOR / LEAD FORM -->
-<div class="calc-wrap" id="calculator">
-  <div class="calc-inner">
-    <div>
-      <div class="section-eyebrow">Free Cost Estimate</div>
-      <div class="section-title">What will your project cost?</div>
-      <div class="section-sub">Answer a few quick questions and we'll show you a fair price range based on real recent projects in Long Island, Brooklyn and Queens.</div>
-      <div class="result-estimate">
-        <div class="est-label">Estimated Range</div>
-        <div class="est-range" id="rangeDisplay">$12,500 – $18,200</div>
-        <div class="est-note">Based on recent projects in your area</div>
-        <div class="result-checks">
-          <div class="check-row">
-            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            Includes labor &amp; materials
+<div class="quiz-wrap" id="calculator">
+  <div class="quiz-card">
+
+    <!-- Progress bar -->
+    <div class="quiz-progress-header">
+      <span>YOUR PROGRESS</span>
+      <span id="quizPct">0%</span>
+    </div>
+    <div class="quiz-progress-track">
+      <div class="quiz-progress-fill" id="quizFill"></div>
+    </div>
+
+    <!-- Step 1: Project type -->
+    <div class="quiz-step active" id="qstep1">
+      <div class="quiz-body">
+        <div class="quiz-q">What type of project are you looking for?</div>
+        <div class="service-grid">
+          <div class="service-card" onclick="pickService('Roofing', this)">
+            <span class="service-icon">🏠</span>
+            <div class="service-label">Roofing</div>
           </div>
-          <div class="check-row">
-            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            Local NY Metro pricing data
+          <div class="service-card" onclick="pickService('Siding', this)">
+            <span class="service-icon">🏗️</span>
+            <div class="service-label">Siding</div>
           </div>
-          <div class="check-row">
-            <div class="check-icon"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 5l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            No obligation, 100% free
+          <div class="service-card" onclick="pickService('Windows', this)">
+            <span class="service-icon">🪟</span>
+            <div class="service-label">Windows</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="calc-result-panel">
-      <div class="calc-form">
-        <div class="form-row">
-          <div class="form-field">
-            <label>Project Type</label>
-            <select id="projectType" onchange="updateEstimate()">
-              <option>Roof Replacement</option>
-              <option>Window Installation</option>
-              <option>Siding</option>
-              <option>Decking</option>
-              <option>Gutters</option>
-              <option>Doors</option>
-            </select>
-          </div>
-          <div class="form-field">
-            <label>Home Size</label>
-            <select id="homeSize" onchange="updateEstimate()">
-              <option>Under 1,500 sq ft</option>
-              <option selected>1,500 – 2,000 sq ft</option>
-              <option>2,000 – 2,500 sq ft</option>
-              <option>2,500+ sq ft</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-field">
-            <label>First Name</label>
-            <input type="text" placeholder="John" id="firstName"/>
-          </div>
-          <div class="form-field">
-            <label>Last Name</label>
-            <input type="text" placeholder="Smith" id="lastName"/>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-field">
-            <label>Phone</label>
-            <input type="tel" placeholder="(516) 555-0100" id="phone"/>
-          </div>
-          <div class="form-field">
-            <label>Zip Code</label>
-            <input type="text" placeholder="11501" id="zip" maxlength="5"/>
-          </div>
-        </div>
-        <div class="form-field" style="margin-bottom:14px">
-          <label>Email</label>
-          <input type="email" placeholder="john@email.com" id="email"/>
-        </div>
 
-        <!-- TCPA Consent -->
-        <div class="tcpa-row">
-          <input type="checkbox" id="tcpaConsent"/>
-          <label for="tcpaConsent">I agree to be contacted regarding my project by phone, text message, and email from participating contractors and service providers.</label>
+    <!-- Step 2: Service type -->
+    <div class="quiz-step" id="qstep2">
+      <div class="quiz-body">
+        <div class="quiz-q">Type of service required?</div>
+        <div class="pill-grid">
+          <button class="quiz-pill" onclick="pickPill(this, 'serviceType', 'Replace / Install New'); nextStep(3, 33)">Replace / Install New</button>
+          <button class="quiz-pill" onclick="pickPill(this, 'serviceType', 'Repair'); nextStep(3, 33)">Repair</button>
         </div>
-        <div class="tcpa-row" style="margin-bottom:14px">
-          <input type="checkbox" id="termsConsent"/>
-          <label for="termsConsent">I agree to the <a href="#" style="color:var(--blue)">Terms of Service</a> and <a href="#" style="color:var(--blue)">Privacy Policy</a>.</label>
+        <button class="quiz-back-link" onclick="nextStep(1, 0)">← Back</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Home size -->
+    <div class="quiz-step" id="qstep3">
+      <div class="quiz-body">
+        <div class="quiz-q">What's your home size?</div>
+        <div class="option-list">
+          <button class="quiz-option" onclick="pickOption(this, 'homeSize', 'Under 1,500 sq ft'); nextStep(4, 50)">Under 1,500 sq ft</button>
+          <button class="quiz-option" onclick="pickOption(this, 'homeSize', '1,500 – 2,000 sq ft'); nextStep(4, 50)">1,500 – 2,000 sq ft</button>
+          <button class="quiz-option" onclick="pickOption(this, 'homeSize', '2,000 – 2,500 sq ft'); nextStep(4, 50)">2,000 – 2,500 sq ft</button>
+          <button class="quiz-option" onclick="pickOption(this, 'homeSize', '2,500+ sq ft'); nextStep(4, 50)">2,500+ sq ft</button>
         </div>
+        <button class="quiz-back-link" onclick="nextStep(2, 17)">← Back</button>
+      </div>
+    </div>
 
-        <button class="form-submit" onclick="submitLead()">Get My Free Quotes →</button>
+    <!-- Step 4: Timeline -->
+    <div class="quiz-step" id="qstep4">
+      <div class="quiz-body">
+        <div class="quiz-q">Your project timeframe?</div>
+        <div class="option-list">
+          <button class="quiz-option" onclick="pickOption(this, 'timeline', 'Immediately'); nextStep(5, 66)">Immediately</button>
+          <button class="quiz-option" onclick="pickOption(this, 'timeline', 'Within 6 months'); nextStep(5, 66)">Within 6 months</button>
+          <button class="quiz-option" onclick="pickOption(this, 'timeline', 'Just planning / exploring'); nextStep(5, 66)">Just planning / exploring</button>
+        </div>
+        <button class="quiz-back-link" onclick="nextStep(3, 33)">← Back</button>
+      </div>
+    </div>
 
-        <div class="form-disclaimer">
-          By clicking above and checking the box, you agree to receive calls, texts, and emails regarding your project from participating contractors. Consent is not a condition of purchase. Msg &amp; data rates may apply.
+    <!-- Step 5: Zip code -->
+    <div class="quiz-step" id="qstep5">
+      <div class="quiz-body">
+        <div class="quiz-q">Where will this project take place?</div>
+        <input type="text" id="quizZip" class="quiz-zip-input" placeholder="Zip Code" maxlength="5" oninput="this.value=this.value.replace(/\D/g,'');this.classList.remove('error')"/>
+        <div class="quiz-owner-check">
+          <input type="checkbox" id="ownerCheck" checked/>
+          <label for="ownerCheck">I am the owner of the property</label>
+        </div>
+        <button class="quiz-cta" onclick="submitZip()">Check Prices Now →</button>
+        <div class="quiz-note">⏱ It only takes a minute!</div>
+        <button class="quiz-back-link" style="display:block;margin:12px auto 0;text-align:center" onclick="nextStep(4, 50)">← Back</button>
+      </div>
+    </div>
+
+    <!-- Step 6: "Perfect!" + contact info -->
+    <div class="quiz-step" id="qstep6">
+      <div class="quiz-split">
+        <div class="quiz-split-left">
+          <div class="quiz-check-circle">
+            <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+              <path d="M9 21l8 8 16-16" stroke="#10B981" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="quiz-split-title">Perfect!</div>
+          <div class="quiz-split-sub">Your cost estimates<br/>are ready!</div>
+        </div>
+        <div class="quiz-split-right">
+          <div class="quiz-contact-header">
+            <span class="arrow">↓</span> Who will be receiving the price quotes?
+          </div>
+          <div class="quiz-field">
+            <label>Name</label>
+            <input type="text" id="quizName" placeholder="Please enter first and last name"/>
+          </div>
+          <div class="quiz-field">
+            <label>Phone <span class="privacy-note">We highly respect your privacy</span></label>
+            <input type="tel" id="quizPhone" placeholder="Your Phone Number"/>
+          </div>
+          <div class="quiz-field">
+            <label>Email <span class="privacy-note">No spam at all</span></label>
+            <input type="email" id="quizEmail" placeholder="Your Email"/>
+          </div>
+          <div class="quiz-tcpa">
+            By submitting, you authorize FairHomeQuotes and participating service professionals to contact you via automated calls, texts, or emails regarding your project. Consent is not a condition of purchase. Msg &amp; data rates may apply. View our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+          </div>
+          <button class="quiz-cta" onclick="submitLead()">Get My Free Quotes →</button>
+          <div class="quiz-trust">🔒 Fully SSL Secured. We Respect Your Privacy.</div>
         </div>
       </div>
     </div>
+
+    <!-- Step 7: Thank you -->
+    <div class="quiz-step" id="qstep7">
+      <div class="quiz-thankyou">
+        <div class="quiz-thankyou-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M6 16l7 7 13-13" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 style="font-size:22px;font-weight:800;color:#111827;margin-bottom:10px">You're all set!</h3>
+        <p style="color:#6B7280;font-size:15px;line-height:1.7;max-width:380px;margin:0 auto">A local contractor will reach out within 24 hours with your free quote. Check your email for confirmation.</p>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -2737,105 +3099,83 @@
 </footer>
 
 <script>
-  const ranges = {
-    'Roof Replacement': {
-      'Under 1,500 sq ft':   '$9,500 – $14,200',
-      '1,500 – 2,000 sq ft': '$12,500 – $18,200',
-      '2,000 – 2,500 sq ft': '$15,000 – $22,000',
-      '2,500+ sq ft':        '$18,000 – $28,000'
-    },
-    'Window Installation': {
-      'Under 1,500 sq ft':   '$4,200 – $8,500',
-      '1,500 – 2,000 sq ft': '$6,500 – $12,000',
-      '2,000 – 2,500 sq ft': '$8,000 – $15,000',
-      '2,500+ sq ft':        '$10,000 – $20,000'
-    },
-    'Siding': {
-      'Under 1,500 sq ft':   '$7,000 – $12,000',
-      '1,500 – 2,000 sq ft': '$9,500 – $16,000',
-      '2,000 – 2,500 sq ft': '$12,000 – $20,000',
-      '2,500+ sq ft':        '$15,000 – $25,000'
-    },
-    'Decking': {
-      'Under 1,500 sq ft':   '$8,000 – $13,000',
-      '1,500 – 2,000 sq ft': '$10,000 – $18,000',
-      '2,000 – 2,500 sq ft': '$13,000 – $22,000',
-      '2,500+ sq ft':        '$16,000 – $28,000'
-    },
-    'Gutters': {
-      'Under 1,500 sq ft':   '$1,200 – $1,800',
-      '1,500 – 2,000 sq ft': '$1,500 – $2,200',
-      '2,000 – 2,500 sq ft': '$1,800 – $2,600',
-      '2,500+ sq ft':        '$2,200 – $3,200'
-    },
-    'Doors': {
-      'Under 1,500 sq ft':   '$800 – $2,000',
-      '1,500 – 2,000 sq ft': '$1,000 – $2,500',
-      '2,000 – 2,500 sq ft': '$1,200 – $3,000',
-      '2,500+ sq ft':        '$1,500 – $3,500'
-    }
-  };
+  // ── QUIZ FUNNEL ──
+  const quizData = {};
 
-  function updateEstimate() {
-    const project = document.getElementById('projectType').value;
-    const size = document.getElementById('homeSize').value;
-    const range = ranges[project] && ranges[project][size] ? ranges[project][size] : '$12,500 – $18,200';
-    document.getElementById('rangeDisplay').textContent = range;
+  function setProgress(pct) {
+    document.getElementById('quizFill').style.width = pct + '%';
+    document.getElementById('quizPct').textContent = pct + '%';
+  }
+
+  function nextStep(n, pct) {
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById('qstep' + n);
+    if (el) el.classList.add('active');
+    setProgress(pct);
+    // Smooth scroll to quiz top
+    const quiz = document.getElementById('calculator');
+    if (quiz) quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function pickService(service, el) {
+    quizData.service = service;
+    // Brief selected flash, then advance
+    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    setTimeout(() => nextStep(2, 17), 220);
+  }
+
+  function pickPill(el, key, val) {
+    quizData[key] = val;
+    el.closest('.pill-grid').querySelectorAll('.quiz-pill').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function pickOption(el, key, val) {
+    quizData[key] = val;
+    el.closest('.option-list').querySelectorAll('.quiz-option').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function submitZip() {
+    const zipEl = document.getElementById('quizZip');
+    const zip = zipEl.value.trim();
+    if (!zip || zip.length < 5) {
+      zipEl.classList.add('error');
+      zipEl.focus();
+      return;
+    }
+    quizData.zip = zip;
+    nextStep(6, 83);
   }
 
   function submitLead() {
-    const tcpa  = document.getElementById('tcpaConsent').checked;
-    const terms = document.getElementById('termsConsent').checked;
-    const firstName = document.getElementById('firstName').value.trim();
-    const phone     = document.getElementById('phone').value.trim();
-    const email     = document.getElementById('email').value.trim();
+    const name  = document.getElementById('quizName').value.trim();
+    const phone = document.getElementById('quizPhone').value.trim();
+    const email = document.getElementById('quizEmail').value.trim();
 
-    if (!firstName || !phone || !email) {
+    if (!name || !phone || !email) {
       alert('Please fill in your name, phone, and email to continue.');
       return;
     }
-    if (!tcpa || !terms) {
-      alert('Please check both consent boxes to continue.');
-      return;
-    }
 
-    // ── TODO: Replace this with your GHL webhook URL ──
+    Object.assign(quizData, {
+      name, phone, email,
+      timestamp:      new Date().toISOString(),
+      landingPage:    window.location.href,
+      consentVersion: 'TCPA_v1.0',
+      userAgent:      navigator.userAgent
+    });
+
+    // ── TODO: Replace with your GHL webhook URL ──
     // const GHL_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/YOUR_WEBHOOK_ID';
-    // 
-    // const payload = {
-    //   firstName:    document.getElementById('firstName').value,
-    //   lastName:     document.getElementById('lastName').value,
-    //   phone:        document.getElementById('phone').value,
-    //   email:        document.getElementById('email').value,
-    //   zip:          document.getElementById('zip').value,
-    //   projectType:  document.getElementById('projectType').value,
-    //   homeSize:     document.getElementById('homeSize').value,
-    //   estimate:     document.getElementById('rangeDisplay').textContent,
-    //   tcpaConsent:  true,
-    //   timestamp:    new Date().toISOString(),
-    //   landingPage:  window.location.href,
-    //   consentVersion: 'TCPA_v1.0',
-    //   userAgent:    navigator.userAgent
-    // };
-    //
-    // fetch(GHL_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
-    //   .then(() => showThankYou())
-    //   .catch(err => console.error('GHL submission error:', err));
+    // fetch(GHL_WEBHOOK, {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(quizData)
+    // }).catch(err => console.error('GHL submission error:', err));
 
-    showThankYou();
-  }
-
-  function showThankYou() {
-    const form = document.querySelector('.calc-form');
-    form.innerHTML = `
-      <div style="text-align:center;padding:40px 20px">
-        <div style="width:60px;height:60px;background:#ECFDF5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M5 14l6 6 12-12" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3 style="font-size:20px;font-weight:800;color:#111827;margin-bottom:8px">You're all set!</h3>
-        <p style="font-size:14px;color:#6B7280;line-height:1.6">A local contractor will reach out within 24 hours with your free quote. Check your email for confirmation.</p>
-      </div>
-    `;
+    nextStep(7, 100);
   }
 </script>
 </body>
