@@ -1012,6 +1012,24 @@
     font-size: 12px !important;
   }
 
+  /* Hero checks/benefits — order 7 (below buttons, above social proof) */
+  div[style*="display:flex;gap:20px;margin-bottom:32px;flex-wrap:wrap;"] {
+    order: 7 !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+  }
+
+  div[style*="display:flex;gap:20px;margin-bottom:32px;flex-wrap:wrap;"] > div {
+    width: 100% !important;
+  }
+
+  /* Ensure social proof is last */
+  .hero-social-proof {
+    margin-bottom: 0 !important;
+  }
+
+  
     /* ── TRUST BAR ── */
   .trust-bar {
     background: var(--white);
