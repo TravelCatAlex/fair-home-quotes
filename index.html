@@ -920,31 +920,38 @@
   .area-banner p { font-size: 11px !important; }
 
   /* ── HERO ── */
-  /* Content grid — change from 2-col to 1-col on mobile, keep position relative */
-  div[style*="position:relative;z-index:2;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;min-height:580px"] {
-    grid-template-columns: 1fr !important;
+  /* Hero outer container: switch to flex column to enable reordering */
+  div[style*="background:linear-gradient(105deg,#E8EEFF 0%,#EEF2FF 25%,#F0F5FF 50%,#F5F8FF 70%,#ffffff 100%);border-bottom:1px solid #E5E7EB;overflow:hidden;position:relative;min-height:580px;"] {
+    display: flex !important;
+    flex-direction: column !important;
     min-height: auto !important;
-    grid-template-rows: auto auto auto auto auto !important;
+    position: relative !important;
   }
 
-  /* House SVG — reposition to static and place at top with grid-row */
+  /* House SVG — move to top (order: 1) and make full width */
   div[style*="position:absolute;right:-2%;top:-8%;bottom:-8%;width:62%"] {
     position: static !important;
     width: 100% !important;
-    height: 200px !important;
+    height: 280px !important;
     margin: 0 !important;
     z-index: 2 !important;
-    grid-row: 1 !important;
-    grid-column: 1 !important;
+    order: 1 !important;
   }
 
-  /* Left content column — move to row 2 */
+  /* Left content column — move below house (order: 2) */
   div[style*="padding:72px 32px 72px 48px;display:flex;flex-direction:column;justify-content:center"] {
-    padding: 16px 16px 16px 16px !important;
+    padding: 24px 16px 24px 16px !important;
     width: 100% !important;
-    grid-row: 2 !important;
-    grid-column: 1 !important;
+    order: 2 !important;
     justify-content: flex-start !important;
+  }
+
+  /* Floating cards column — move below buttons (order: 3) */
+  div[style*="position:relative;z-index:3"] {
+    position: relative !important;
+    z-index: 2 !important;
+    order: 3 !important;
+    padding: 0 16px 24px !important;
   }
 
   /* Hide the floating cards column on mobile */
