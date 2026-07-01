@@ -920,37 +920,36 @@
   .area-banner p { font-size: 11px !important; }
 
   /* ── HERO ── */
-  /* Reposition house from absolute to visible block on mobile */
+  /* Content grid — change from 2-col to 1-col on mobile, keep position relative */
+  div[style*="position:relative;z-index:2;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;min-height:580px"] {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    grid-template-rows: auto auto auto auto auto !important;
+  }
+
+  /* House SVG — reposition to static and place at top with grid-row */
   div[style*="position:absolute;right:-2%;top:-8%;bottom:-8%;width:62%"] {
     position: static !important;
     width: 100% !important;
     height: 200px !important;
-    margin: 12px -16px !important;
+    margin: 0 !important;
     z-index: 2 !important;
-    order: 3 !important;
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+  }
+
+  /* Left content column — move to row 2 */
+  div[style*="padding:72px 32px 72px 48px;display:flex;flex-direction:column;justify-content:center"] {
+    padding: 16px 16px 16px 16px !important;
+    width: 100% !important;
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+    justify-content: flex-start !important;
   }
 
   /* Hide the floating cards column on mobile */
   div[style*="position:relative;z-index:3"] {
     display: none !important;
-  }
-
-  /* Main hero wrapper at 4445 */
-  div[style*="background:linear-gradient(105deg,#E8EEFF"] {
-    display: flex !important;
-    flex-direction: column !important;
-    position: relative !important;
-    min-height: auto !important;
-  }
-
-  /* Left content column (badge, h1, p, buttons) */
-  div[style*="padding:72px 32px 72px 48px;display:flex;flex-direction:column"] {
-    padding: 16px 16px 16px 16px !important;
-    width: 100% !important;
-    position: relative !important;
-    z-index: 2 !important;
-    display: flex !important;
-    flex-direction: column !important;
   }
 
   /* Badge — order 1 */
@@ -968,18 +967,18 @@
     margin-bottom: 8px !important;
   }
 
-  /* Paragraph/description — order 4 */
+  /* Paragraph/description — order 3 */
   div[style*="padding:72px 32px 72px 48px"] > p {
-    order: 4 !important;
+    order: 3 !important;
     font-size: 14px !important;
     margin-bottom: 12px !important;
     line-height: 1.5 !important;
     max-width: 100% !important;
   }
 
-  /* Buttons (Start My Project, View Cost Guides) — order 5 */
+  /* Buttons (Start My Project, View Cost Guides) — order 4 */
   div[style*="padding:72px 32px 72px 48px"] > div[style*="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px"] {
-    order: 5 !important;
+    order: 4 !important;
     flex-direction: column !important;
     gap: 8px !important;
     margin-bottom: 12px !important;
@@ -992,9 +991,9 @@
     text-align: center !important;
   }
 
-  /* Trust bullets (Vetted, Competitive, 100% Free) — order 6 */
+  /* Trust bullets (Vetted, Competitive, 100% Free) — order 5 */
   div[style*="padding:72px 32px 72px 48px"] > div[style*="gap:20px;margin-bottom:32px"] {
-    order: 6 !important;
+    order: 5 !important;
     flex-direction: column !important;
     gap: 6px !important;
     margin-bottom: 12px !important;
@@ -1004,9 +1003,9 @@
     font-size: 13px !important;
   }
 
-  /* Social proof section (avatars + text) — order 7 */
+  /* Social proof section (avatars + text) — order 6 */
   div[style*="padding:72px 32px 72px 48px"] > div[style*="display:flex;align-items:center;gap:12px"] {
-    order: 7 !important;
+    order: 6 !important;
     margin-top: 12px !important;
     margin-bottom: 16px !important;
     justify-content: center !important;
