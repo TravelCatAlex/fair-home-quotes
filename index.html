@@ -4329,6 +4329,10 @@
   /* Quiz funnel */
   .quiz-wrap { padding: 32px 12px !important; }
   .quiz-card { border-radius: 14px !important; }
+  .quiz-header { padding: 20px 16px !important; gap: 12px !important; }
+  .quiz-logo-box { width: 44px !important; height: 44px !important; }
+  .quiz-header-title { font-size: 16px !important; }
+  .quiz-header-sub { font-size: 11px !important; }
   .quiz-progress-header { padding: 12px 16px 8px !important; font-size: 10px !important; }
   .quiz-body { padding: 18px 14px 16px !important; }
   .quiz-q { font-size: 16px !important; margin-bottom: 16px !important; }
@@ -4685,7 +4689,57 @@
   border: 1px solid var(--gray-border);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 48px rgba(15,61,255,0.12), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Quiz Header with Logo */
+.quiz-header {
+  background: linear-gradient(135deg, #EEF2FF 0%, #F5F8FF 100%);
+  padding: 28px 28px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 2px solid #E0E7FF;
+}
+
+.quiz-logo-box {
+  width: 52px;
+  height: 52px;
+  background: var(--blue);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 20px rgba(15,61,255,0.25);
+}
+
+.quiz-logo-box svg {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+}
+
+.quiz-header-text {
+  flex: 1;
+}
+
+.quiz-header-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--dark);
+  margin: 0;
+}
+
+.quiz-header-title span {
+  color: var(--blue);
+}
+
+.quiz-header-sub {
+  font-size: 12px;
+  color: var(--gray);
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-top: 2px;
 }
 .quiz-progress-header {
   display: flex;
@@ -4699,24 +4753,31 @@
   color: var(--gray);
 }
 .quiz-progress-track {
-  height: 5px;
+  height: 6px;
   background: var(--gray-border);
+  position: relative;
+  overflow: hidden;
 }
 .quiz-progress-fill {
   height: 100%;
-  background: var(--green);
+  background: linear-gradient(90deg, #10B981 0%, #06B6D4 100%);
   transition: width 0.4s ease;
   width: 0%;
+  box-shadow: 0 0 16px rgba(16,185,129,0.6);
 }
 .quiz-step { display: none; }
 .quiz-step.active { display: block; }
-.quiz-body { padding: 28px 28px 24px; }
+.quiz-body { padding: 32px 32px 28px; }
 .quiz-q {
-  font-size: 19px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 800;
   color: var(--dark);
-  margin-bottom: 22px;
+  margin-bottom: 26px;
   line-height: 1.3;
+  background: linear-gradient(135deg, var(--dark) 0%, #374151 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 /* Step 1 – service cards */
 .service-grid {
@@ -4730,18 +4791,22 @@
   padding: 26px 12px 20px;
   text-align: center;
   cursor: pointer;
-  transition: border-color .15s, background .15s, transform .12s;
+  transition: border-color .2s, background .2s, transform .2s, box-shadow .2s;
   background: var(--white);
   user-select: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 .service-card:hover {
   border-color: var(--blue);
   background: var(--blue-light);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(15,61,255,0.18);
 }
 .service-card.selected {
   border-color: var(--blue);
   background: var(--blue-light);
+  box-shadow: 0 8px 24px rgba(15,61,255,0.22);
+  transform: scale(1.02);
 }
 .service-icon {
   font-size: 42px;
@@ -4769,38 +4834,56 @@
   color: var(--dark);
   background: var(--white);
   cursor: pointer;
-  transition: border-color .15s, background .15s, color .15s;
+  transition: border-color .2s, background .2s, color .2s, box-shadow .2s, transform .15s;
   font-family: 'Inter', sans-serif;
   text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
-.quiz-pill:hover, .quiz-pill.selected {
+.quiz-pill:hover {
   border-color: var(--blue);
   background: var(--blue-light);
   color: var(--blue);
+  box-shadow: 0 6px 16px rgba(15,61,255,0.12);
+  transform: translateY(-2px);
+}
+.quiz-pill.selected {
+  border-color: var(--blue);
+  background: var(--blue-light);
+  color: var(--blue);
+  box-shadow: 0 6px 20px rgba(15,61,255,0.18);
 }
 /* Steps 3-4 – option list */
 .option-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 .quiz-option {
   border: 2px solid var(--gray-border);
   border-radius: 12px;
-  padding: 15px 20px;
+  padding: 16px 20px;
   font-size: 15px;
   font-weight: 600;
   color: var(--dark);
   background: var(--white);
   cursor: pointer;
   text-align: left;
-  transition: border-color .15s, background .15s, color .15s;
+  transition: border-color .2s, background .2s, color .2s, box-shadow .2s, transform .15s;
   font-family: 'Inter', sans-serif;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
-.quiz-option:hover, .quiz-option.selected {
+.quiz-option:hover {
   border-color: var(--blue);
   background: var(--blue-light);
   color: var(--blue);
+  box-shadow: 0 6px 16px rgba(15,61,255,0.12);
+  transform: translateX(4px);
+}
+.quiz-option.selected {
+  border-color: var(--blue);
+  background: var(--blue-light);
+  color: var(--blue);
+  box-shadow: 0 6px 20px rgba(15,61,255,0.18);
 }
 /* Back link */
 .quiz-back-link {
@@ -4820,18 +4903,26 @@
   width: 100%;
   border: 2px solid var(--gray-border);
   border-radius: 12px;
-  padding: 16px 20px;
+  padding: 18px 20px;
   font-size: 22px;
   font-weight: 700;
   color: var(--dark);
   font-family: 'Inter', sans-serif;
   outline: none;
   margin-bottom: 12px;
-  transition: border-color .15s;
+  transition: border-color .2s, box-shadow .2s;
   letter-spacing: 4px;
+  background: var(--white);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
-.quiz-zip-input:focus { border-color: var(--blue); }
-.quiz-zip-input.error { border-color: #EF4444; }
+.quiz-zip-input:focus { 
+  border-color: var(--blue);
+  box-shadow: 0 6px 20px rgba(15,61,255,0.16);
+}
+.quiz-zip-input.error { 
+  border-color: #EF4444;
+  box-shadow: 0 6px 20px rgba(239,68,68,0.16);
+}
 .quiz-owner-check {
   display: flex;
   align-items: center;
@@ -4845,20 +4936,25 @@
 /* CTA button */
 .quiz-cta {
   width: 100%;
-  padding: 16px;
-  background: var(--blue);
+  padding: 18px;
+  background: linear-gradient(135deg, var(--blue) 0%, #1E40AF 100%);
   color: var(--white);
   border: none;
   border-radius: 12px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: background .15s, transform .1s;
+  transition: background .2s, transform .15s, box-shadow .2s;
   font-family: 'Inter', sans-serif;
   margin-bottom: 6px;
+  box-shadow: 0 6px 20px rgba(15,61,255,0.3);
 }
-.quiz-cta:hover { background: var(--blue-dark); }
-.quiz-cta:active { transform: scale(0.99); }
+.quiz-cta:hover { 
+  background: linear-gradient(135deg, #1E40AF 0%, #1E3A8A 100%);
+  box-shadow: 0 12px 32px rgba(15,61,255,0.4);
+  transform: translateY(-2px);
+}
+.quiz-cta:active { transform: scale(0.98); }
 .quiz-note {
   text-align: center;
   font-size: 12px;
@@ -4990,6 +5086,22 @@
 <!-- CALCULATOR / LEAD FORM -->
 <div class="quiz-wrap" id="calculator">
   <div class="quiz-card">
+
+    <!-- Logo Header -->
+    <div class="quiz-header">
+      <div class="quiz-logo-box">
+        <svg width="28" height="28" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 2L2 8.5V20H8V14H14V20H20V8.5L11 2Z" fill="#0F3DFF" stroke="#0F3DFF" stroke-width="0" stroke-linejoin="round"/>
+          <path d="M7 20V15H15V20" stroke="#0F3DFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="17" cy="6" r="3" fill="#10B981"/>
+          <path d="M15.5 6L16.5 7L18.5 5" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="quiz-header-text">
+        <div class="quiz-header-title">Fair<span>Home</span>Quotes</div>
+        <div class="quiz-header-sub">Get Your Free Estimate</div>
+      </div>
+    </div>
 
     <!-- Progress bar -->
     <div class="quiz-progress-header">
