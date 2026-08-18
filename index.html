@@ -5052,6 +5052,165 @@
   color: var(--gray);
   margin-top: 8px;
 }
+
+/* Checkboxes */
+.quiz-checkboxes {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--dark);
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  margin-top: 2px;
+  cursor: pointer;
+  accent-color: var(--blue);
+  border: 1px solid var(--gray-border);
+  border-radius: 3px;
+}
+
+.checkbox-group label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group a {
+  color: var(--blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.checkbox-group a:hover {
+  text-decoration: underline;
+}
+
+.checkbox-error {
+  color: #EF4444;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  overflow-y: auto;
+}
+
+.modal.open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: var(--white);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray-border);
+}
+
+.modal-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--gray);
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: var(--dark);
+}
+
+.modal-body {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--dark);
+}
+
+.modal-body h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+.modal-body p {
+  margin-bottom: 12px;
+}
+
+.modal-body ul {
+  margin-left: 20px;
+  margin-bottom: 12px;
+}
+
+.modal-body li {
+  margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .modal-header h2 {
+    font-size: 20px;
+  }
+  
+  .modal-body {
+    font-size: 13px;
+  }
+}
+
 /* Step 7 – thank you */
 .quiz-thankyou {
   padding: 56px 24px;
@@ -5215,8 +5374,16 @@
             <label>Email <span class="privacy-note">No spam at all</span></label>
             <input type="email" id="quizEmail" placeholder="Your Email"/>
           </div>
-          <div class="quiz-tcpa">
-            By submitting, you authorize FairHomeQuotes and participating service professionals to contact you via automated calls, texts, or emails regarding your project. Consent is not a condition of purchase. Msg &amp; data rates may apply. View our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+          <div class="quiz-checkboxes">
+            <div class="checkbox-group">
+              <input type="checkbox" id="contactConsent"/>
+              <label for="contactConsent">I agree to be contacted regarding my home improvement project. By checking this box and submitting my request, I agree to receive calls, text messages, and emails from Fair Home Quotes and the participating contractor or service provider identified in connection with my request, including communications using automated technology, prerecorded messages, or artificial voice where permitted by law. Consent is not a condition of purchase. Message and data rates may apply. Reply STOP to opt out of texts.</label>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="termsConsent"/>
+              <label for="termsConsent">I have read and agree to the <a href="javascript:void(0)" onclick="openTermsModal()">Terms of Service</a> and <a href="javascript:void(0)" onclick="openPrivacyModal()">Privacy Policy</a>.</label>
+            </div>
+            <div class="checkbox-error" id="checkboxError" style="display:none;color:#EF4444;font-size:13px;margin-top:8px">Both consent and terms must be checked to continue.</div>
           </div>
           <button class="quiz-cta" onclick="submitLead()">Get My Free Quotes →</button>
           <div class="quiz-trust">🔒 Fully SSL Secured. We Respect Your Privacy.</div>
@@ -5404,8 +5571,8 @@
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
+        <li><a href="javascript:void(0)" onclick="openPrivacyModal()">Privacy Policy</a></li>
+        <li><a href="javascript:void(0)" onclick="openTermsModal()">Terms of Service</a></li>
         <li><a href="#">Do Not Sell My Info</a></li>
       </ul>
     </div>
@@ -5413,12 +5580,34 @@
   <div class="footer-bottom">
     <p>© 2026 FairHomeQuotes. All rights reserved. Serving Long Island, Brooklyn &amp; Queens.</p>
     <div class="footer-legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
+      <a href="javascript:void(0)" onclick="openPrivacyModal()">Privacy</a>
+      <a href="javascript:void(0)" onclick="openTermsModal()">Terms</a>
       <a href="#">TCPA Disclosure</a>
     </div>
   </div>
 </footer>
+
+<!-- Privacy Policy Modal -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Privacy Policy</h2>
+      <button class="modal-close" onclick="closePrivacyModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="privacyContent"></div>
+  </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div id="termsModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Terms of Service</h2>
+      <button class="modal-close" onclick="closeTermsModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="termsContent"></div>
+  </div>
+</div>
 
 <script>
   // ── QUIZ FUNNEL ──
@@ -5475,11 +5664,21 @@
     const name  = document.getElementById('quizName').value.trim();
     const phone = document.getElementById('quizPhone').value.trim();
     const email = document.getElementById('quizEmail').value.trim();
+    const contactConsent = document.getElementById('contactConsent').checked;
+    const termsConsent = document.getElementById('termsConsent').checked;
+    const errorEl = document.getElementById('checkboxError');
 
     if (!name || !phone || !email) {
       alert('Please fill in your name, phone, and email to continue.');
       return;
     }
+
+    if (!contactConsent || !termsConsent) {
+      errorEl.style.display = 'block';
+      return;
+    }
+    
+    errorEl.style.display = 'none';
 
     // Disable submit button to prevent double-submission
     const submitBtn = event.target;
@@ -5539,6 +5738,242 @@
       alert('There was an issue submitting your information. Please try again or contact support.');
     });
   }
+
+  // ── PRIVACY POLICY & TERMS MODALS ──
+  const privacyPolicyText = `
+<h3>Fair Home Quotes — Privacy Policy</h3>
+<p><strong>Last Updated: August 18, 2026</strong></p>
+<p>Fair Home Quotes, operated by HB Holdings East LLC ("Fair Home Quotes," "we," "us," or "our"), respects your privacy. This Privacy Policy explains what information we collect, how we use it, when we disclose it, and the choices available to you.</p>
+
+<h3>1. Information We Collect</h3>
+<p>When you use Fair Home Quotes, we may collect information you provide directly, including:</p>
+<ul>
+<li>name;</li>
+<li>telephone number;</li>
+<li>email address;</li>
+<li>ZIP code;</li>
+<li>property or project address;</li>
+<li>project type;</li>
+<li>property information;</li>
+<li>project timing;</li>
+<li>budget or financing information;</li>
+<li>answers to project qualification questions; and</li>
+<li>other information you voluntarily provide.</li>
+</ul>
+<p>We may also automatically collect information such as:</p>
+<ul>
+<li>IP address;</li>
+<li>browser and device type;</li>
+<li>operating system;</li>
+<li>referring URL;</li>
+<li>landing page;</li>
+<li>pages viewed;</li>
+<li>timestamps;</li>
+<li>advertising and cookie identifiers; and</li>
+<li>interactions with our website and advertisements.</li>
+</ul>
+
+<h3>2. How We Use Your Information</h3>
+<p>We may use your information to:</p>
+<ul>
+<li>provide our contractor-matching Services;</li>
+<li>understand your home improvement project;</li>
+<li>provide project and pricing information;</li>
+<li>identify a contractor serving your location and project type;</li>
+<li>communicate with you regarding your request;</li>
+<li>transmit your request to a participating contractor or service provider;</li>
+<li>operate and improve our Services;</li>
+<li>measure advertising and marketing performance;</li>
+<li>detect and prevent fraud;</li>
+<li>maintain compliance and consent records;</li>
+<li>respond to customer-service requests; and</li>
+<li>comply with applicable law.</li>
+</ul>
+
+<h3>3. Contractor Matching and Sharing Your Information</h3>
+<p>When you request to be matched with a contractor, we may share the information you submit with a participating independent contractor or home service provider that may be able to serve your project.</p>
+<p>Depending on your project, location, contractor availability, and other factors, your request may be provided to one or more participating contractors or service providers.</p>
+<p>You should not assume that submitting a request through Fair Home Quotes will result in multiple contractor matches or multiple competing quotes.</p>
+<p>A participating contractor may contact you regarding your request in accordance with the consent you provide and applicable law.</p>
+<p>Participating contractors are independent businesses and may maintain their own privacy policies and data practices.</p>
+
+<h3>4. Communication Consent</h3>
+<p>If you provide the applicable consent, Fair Home Quotes and/or the participating contractor or service provider identified in connection with your request may contact you regarding your home improvement project.</p>
+<p>Depending on your consent and applicable law, communications may include:</p>
+<ul>
+<li>telephone calls;</li>
+<li>SMS or text messages;</li>
+<li>emails;</li>
+<li>communications made using automated technology; and</li>
+<li>prerecorded or artificial-voice communications.</li>
+</ul>
+<p>Consent to receive marketing communications is not a condition of purchasing goods or services.</p>
+<p>You may reply STOP to opt out of text messages.</p>
+<p>You may also request that a caller place you on its internal do-not-call list.</p>
+
+<h3>5. Consent Records</h3>
+<p>When you submit a contractor request or provide communication consent, we may maintain records documenting the transaction.</p>
+
+<h3>6. Service Providers</h3>
+<p>We may disclose information to companies that help us operate our business, such as providers of website hosting, CRM systems, data storage, email delivery, telephone and SMS communications, call tracking, analytics, advertising and attribution, fraud prevention, customer support, and professional services.</p>
+
+<h3>7. Cookies and Tracking Technologies</h3>
+<p>We and our service providers may use cookies, pixels, analytics tools, and similar technologies to operate our website, understand how visitors use the Services, measure advertising effectiveness, attribute leads and conversions, and improve our Services.</p>
+
+<h3>8. Advertising</h3>
+<p>We may work with advertising platforms and other providers to advertise our Services and measure advertising performance.</p>
+
+<h3>9. Other Disclosures</h3>
+<p>We may also disclose information when required by law or legal process, to protect our rights or Services, to investigate fraud or security incidents, in connection with a corporate transaction, or at your direction or with your consent.</p>
+
+<h3>10. Data Retention</h3>
+<p>We retain information for as long as reasonably necessary for the purposes described in this Privacy Policy.</p>
+
+<h3>11. Data Security</h3>
+<p>We use reasonable administrative, technical, and organizational safeguards designed to protect personal information. No system can guarantee absolute security.</p>
+
+<h3>12. Your Privacy Rights</h3>
+<p>Depending on your state of residence, applicable law may provide rights concerning your personal information, including rights to request access, correction, deletion, or a copy of certain information, and rights to opt out of certain uses or disclosures where applicable.</p>
+
+<h3>13. Marketing Choices</h3>
+<p>You may unsubscribe from promotional emails through the unsubscribe link provided in those emails.</p>
+<p>You may opt out of SMS communications by replying STOP.</p>
+
+<h3>14. Children's Privacy</h3>
+<p>Our Services are intended for adults seeking home improvement services and are not directed to children under 18.</p>
+
+<h3>15. Third-Party Websites</h3>
+<p>Our Services may link to third-party websites or contractor websites. Their privacy practices are governed by their own policies, not this Privacy Policy.</p>
+
+<h3>16. Changes to This Privacy Policy</h3>
+<p>We may update this Privacy Policy from time to time. When changes are made, we will update the "Last Updated" date above.</p>
+
+<h3>17. Contact Us</h3>
+<p><strong>Fair Home Quotes<br>HB Holdings East LLC<br>1325 Franklin Avenue<br>Suite 120<br>Garden City, NY 11530</strong></p>
+  `;
+
+  const termsOfServiceText = `
+<h3>Fair Home Quotes — Terms of Service</h3>
+<p><strong>Last Updated: August 18, 2026</strong></p>
+<p>These Terms of Service ("Terms") govern your use of Fair Home Quotes, a service operated by HB Holdings East LLC ("Fair Home Quotes," "we," "us," or "our"), including our website, contractor-matching services, project cost information, and related services (collectively, the "Services").</p>
+<p>By accessing or using our Services, you agree to these Terms.</p>
+
+<h3>1. What We Do</h3>
+<p>Fair Home Quotes helps homeowners research home improvement projects, understand potential project costs, and connect with independent contractors and home service providers.</p>
+<p>Fair Home Quotes is a contractor-matching and information service. Contractors and service providers participating in our network are independent businesses and are not employees, agents, or representatives of Fair Home Quotes.</p>
+
+<h3>2. Contractor Matching</h3>
+<p>When you submit information about your project, we may use that information to identify a contractor or service provider that may be able to assist you.</p>
+<p>Depending on your project, location, contractor availability, and other factors, you may be connected with one or more participating contractors or service providers.</p>
+<p>We do not guarantee:</p>
+<ul>
+<li>that you will receive more than one contractor match;</li>
+<li>that you will receive multiple quotes or estimates;</li>
+<li>that a contractor will respond;</li>
+<li>that a contractor will accept your project;</li>
+<li>that any particular price will be offered; or</li>
+<li>that a matched contractor will ultimately be appropriate for your project.</li>
+</ul>
+<p>You are responsible for evaluating and selecting any contractor you choose to hire.</p>
+
+<h3>3. Contractor Qualifications</h3>
+<p>We may provide information regarding contractors, such as service areas, licenses, insurance, ratings, reviews, experience, or other qualifications.</p>
+<p>Any description such as "verified," "vetted," "matched," or similar terminology refers only to the verification criteria we specifically describe.</p>
+<p>You should independently confirm licensing, insurance, references, permits, warranties, and other qualifications before hiring a contractor.</p>
+
+<h3>4. Pricing, Estimates and Cost Guides</h3>
+<p>Any cost ranges, calculators, estimates, project guides, or other pricing information provided through Fair Home Quotes are for informational purposes only.</p>
+<p>Actual pricing may vary depending on location, materials, labor, property conditions, project complexity, permits, contractor availability, and other factors.</p>
+<p>Unless expressly identified as a binding proposal from a contractor, pricing displayed through Fair Home Quotes is not a quote, guarantee, or offer.</p>
+<p>Any actual quote or proposal will be provided by the contractor or service provider handling your project request.</p>
+
+<h3>5. Communications and Consent</h3>
+<p>If you provide your contact information and separately consent to communications, Fair Home Quotes and the participating contractor or service provider identified in connection with your request may contact you regarding your project as described in the consent disclosure presented when you submit your information.</p>
+<p>Depending on the consent provided and applicable law, communications may include telephone calls, text messages, and emails and may use automated technology, prerecorded messages, or artificial voice.</p>
+<p>Consent to receive marketing communications is not a condition of purchasing goods or services.</p>
+<p>You may opt out of text messages by replying STOP and may use any other opt-out methods provided in the applicable communication.</p>
+
+<h3>6. Information You Provide</h3>
+<p>You agree that information submitted through the Services will be accurate and that you are authorized to provide the telephone number, email address, property information, and other information submitted.</p>
+
+<h3>7. Your Relationship With Contractors</h3>
+<p>Any contract for home improvement services is entered into directly between you and the contractor.</p>
+<p>Fair Home Quotes is not a party to that agreement.</p>
+<p>To the fullest extent permitted by law, Fair Home Quotes and HB Holdings East LLC are not responsible for a contractor's workmanship, pricing, representations, warranties, scheduling, permits, project delays, property damage, injuries, contractual disputes, or other acts or omissions.</p>
+
+<h3>8. No Guarantee or Endorsement</h3>
+<p>Matching you with a contractor does not constitute a guarantee that the contractor will be suitable for your project.</p>
+<p>Except where expressly stated, inclusion in our contractor network should not be interpreted as an endorsement or warranty of a contractor's work.</p>
+
+<h3>9. Acceptable Use</h3>
+<p>You may not use our Services to:</p>
+<ul>
+<li>submit false or fraudulent information;</li>
+<li>impersonate another person;</li>
+<li>interfere with operation or security of the Services;</li>
+<li>access our Services through unauthorized automated means;</li>
+<li>misuse information obtained through the Services; or</li>
+<li>violate applicable law.</li>
+</ul>
+
+<h3>10. Intellectual Property</h3>
+<p>The Fair Home Quotes website, branding, software, text, graphics, databases, and other content provided by us are owned by or licensed to HB Holdings East LLC and are protected by applicable intellectual property laws.</p>
+
+<h3>11. Third-Party Services</h3>
+<p>Our Services may contain links to or integrate with third-party websites, contractors, platforms, or services.</p>
+<p>We are not responsible for the content, products, services, availability, or privacy practices of third parties.</p>
+
+<h3>12. Disclaimer of Warranties</h3>
+<p>To the fullest extent permitted by applicable law, the Services are provided on an "as is" and "as available" basis.</p>
+<p>We do not warrant that the Services will be uninterrupted, error-free, complete, or suitable for every homeowner or project.</p>
+
+<h3>13. Limitation of Liability</h3>
+<p>To the fullest extent permitted by applicable law, HB Holdings East LLC, its affiliates, owners, employees, and service providers will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages arising from use of the Services or dealings with independent contractors.</p>
+<p>Nothing in these Terms excludes or limits liability that cannot legally be excluded or limited.</p>
+
+<h3>14. Changes to These Terms</h3>
+<p>We may update these Terms from time to time. When we do, we will update the "Last Updated" date above.</p>
+
+<h3>15. Governing Law</h3>
+<p>These Terms are governed by the laws of the State of New York, except where applicable consumer law requires otherwise.</p>
+
+<h3>16. Contact Us</h3>
+<p><strong>Fair Home Quotes<br>HB Holdings East LLC<br>1325 Franklin Avenue<br>Suite 120<br>Garden City, NY 11530</strong></p>
+  `;
+
+  function openPrivacyModal() {
+    document.getElementById('privacyContent').innerHTML = privacyPolicyText;
+    document.getElementById('privacyModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePrivacyModal() {
+    document.getElementById('privacyModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function openTermsModal() {
+    document.getElementById('termsContent').innerHTML = termsOfServiceText;
+    document.getElementById('termsModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeTermsModal() {
+    document.getElementById('termsModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal when clicking outside the content
+  window.addEventListener('click', function(event) {
+    const privacyModal = document.getElementById('privacyModal');
+    const termsModal = document.getElementById('termsModal');
+    if (event.target === privacyModal) {
+      closePrivacyModal();
+    }
+    if (event.target === termsModal) {
+      closeTermsModal();
+    }
+  });
 </script>
 </body>
 </html>
