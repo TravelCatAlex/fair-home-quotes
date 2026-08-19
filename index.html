@@ -5063,10 +5063,11 @@
 
 .checkbox-group {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   gap: 10px;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--dark);
 }
 
@@ -5084,14 +5085,17 @@
 
 .checkbox-group label {
   cursor: pointer;
-  display: flex;
-  align-items: center;
+  display: block;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .checkbox-group a {
   color: var(--blue);
   text-decoration: none;
   font-weight: 600;
+  display: inline;
+  white-space: normal;
 }
 
 .checkbox-group a:hover {
@@ -5239,6 +5243,9 @@
   .quiz-split { grid-template-columns: 1fr; }
   .quiz-split-left { padding: 28px 20px; min-height: 0; }
   .quiz-split-right { padding: 20px 16px 18px; }
+  .checkbox-group { gap: 12px; font-size: 13px; }
+  .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; min-width: 20px; min-height: 20px; margin-top: 1px; flex-shrink: 0; }
+  .checkbox-group label { font-size: 13px; line-height: 1.6; }
 }
 </style>
 
