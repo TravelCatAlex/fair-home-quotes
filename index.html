@@ -3,6 +3,21 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,"script",
+"https://connect.facebook.net/en_US/fbevents.js");
+fbq("init", "287525284992085");
+fbq("track", "PageView");
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=287525284992085&ev=PageView&noscript=1" /></noscript>
+<!-- End Meta Pixel Code -->
 <title>FairHomeQuotes — Trusted Home Improvement Quotes in Long Island, Brooklyn & Queens</title>
 <meta name="description" content="Get fair, transparent quotes for roofing, windows, and siding. Serving Long Island, Brooklyn and Queens homeowners with vetted local contractors."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -5739,6 +5754,14 @@
       nextStep(7, 100);
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
+      
+      // Track conversion in Meta Pixel
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {
+          value: 0.00,
+          currency: 'USD'
+        });
+      }
     })
     .catch(err => {
       console.error('GHL submission error:', err);
