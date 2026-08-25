@@ -18,6 +18,15 @@ fbq("track", "PageView");
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1191659606420698&ev=PageView&noscript=1" /></noscript>
 <!-- End Meta Pixel Code -->
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R226FDVSDP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R226FDVSDP');
+</script>
+<!-- End Google Analytics -->
 <title>FairHomeQuotes — Trusted Home Improvement Quotes in Long Island, Brooklyn & Queens</title>
 <meta name="description" content="Get fair, transparent quotes for roofing, windows, and siding. Serving Long Island, Brooklyn and Queens homeowners with vetted local contractors."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -5760,6 +5769,16 @@ fbq("track", "PageView");
         fbq('track', 'Lead', {
           value: 0.00,
           currency: 'USD'
+        });
+      }
+      
+      // Track conversion in Google Analytics
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'generate_lead', {
+          'event_category': 'form_submission',
+          'event_label': 'Quiz Complete',
+          'service': quizData.service || '',
+          'zip_code': quizData.zip || ''
         });
       }
     })
