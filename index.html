@@ -5759,8 +5759,8 @@ fbq("track", "PageView");
       return response.json().catch(() => ({})); // Some webhooks don't return JSON
     })
     .then(() => {
-      // Success - show completion step
-      nextStep(7, 100);
+      // Success - redirect to thank you page
+      window.location.href = '/thank-you';
       submitBtn.disabled = false;
       submitBtn.textContent = originalText;
       
