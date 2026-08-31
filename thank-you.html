@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,"script",
+"https://connect.facebook.net/en_US/fbevents.js");
+fbq("init", "1191659606420698");
+fbq("track", "PageView");
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1191659606420698&ev=PageView&noscript=1" /></noscript>
+<!-- End Meta Pixel Code -->
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R226FDVSDP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-R226FDVSDP');
+  gtag('event', 'purchase', {
+    'event_category': 'conversion',
+    'event_label': 'Thank You Page View'
+  });
+</script>
+<!-- End Google Analytics -->
+<title>Thank You — Fair Home Quotes</title>
+<meta name="description" content="Thank you for your submission. We'll connect you with local contractors."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect fill='%230F3DFF' width='48' height='48' rx='9'/><path fill='%23ffffff' d='M24 10L16 18v14h8v-8h4v8h8V18l-8-8zm-6 20v-6h12v6H18z'/><path fill='%2310B981' d='M33.5 13l-2.1-2.1-9.4 9.4-3.4-3.4-2.1 2.1 5.5 5.5 11.5-11.5z' transform='translate(1 1)'/></svg>" type="image/svg+xml"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #0F3DFF;
+    --blue-dark: #0A2DB8;
+    --blue-light: #EEF2FF;
+    --green: #10B981;
+    --green-light: #ECFDF5;
+    --dark: #111827;
+    --gray: #6B7280;
+    --gray-light: #F5F7FA;
+    --gray-border: #E5E7EB;
+    --white: #ffffff;
+    --radius: 10px;
+    --radius-lg: 16px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-border);
+    padding: 0 48px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--blue);
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-icon svg { display: block; }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-text-main {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--dark);
+  }
+
+  .logo-text-sub {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--gray);
+  }
+
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  /* ── SUCCESS SECTION ── */
+  .success-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 68px);
+    padding: 40px 20px;
+  }
+
+  .success-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 60px 40px;
+    max-width: 520px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--gray-border);
+  }
+
+  .success-icon {
+    width: 100px;
+    height: 100px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+    animation: scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .success-icon svg {
+    width: 56px;
+    height: 56px;
+    color: var(--green);
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .success-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .success-message {
+    font-size: 16px;
+    color: var(--gray);
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .success-details {
+    background: var(--blue-light);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 28px;
+    text-align: left;
+    border-left: 4px solid var(--blue);
+  }
+
+  .detail-item {
+    font-size: 14px;
+    color: var(--dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .detail-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .detail-check {
+    color: var(--green);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .detail-text {
+    line-height: 1.5;
+  }
+
+  .cta-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cta-primary {
+    background: var(--blue);
+    color: var(--white);
+    border: none;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+
+  .cta-primary:hover {
+    background: var(--blue-dark);
+  }
+
+  .cta-secondary {
+    background: var(--gray-light);
+    color: var(--dark);
+    border: none;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+  }
+
+  .cta-secondary:hover {
+    background: var(--gray-border);
+  }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 24px;
+    line-height: 1.6;
+  }
+
+  .footer-note a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .footer-note a:hover {
+    text-decoration: underline;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav {
+      padding: 0 20px;
+    }
+
+    .container {
+      padding: 40px 20px;
+    }
+
+    .success-card {
+      padding: 40px 24px;
+      margin-top: 20px;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+    }
+
+    .success-icon svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .success-title {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .success-message {
+      font-size: 15px;
+    }
+
+    .success-details {
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .detail-item {
+      font-size: 13px;
+    }
+
+    .cta-primary, .cta-secondary {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo">
+    <div class="logo-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="width: 24px; height: 24px;">
+        <path fill="white" d="M24 10L16 18v14h8v-8h4v8h8V18l-8-8zm-6 20v-6h12v6H18z"/>
+        <path fill="#10B981" d="M33.5 13l-2.1-2.1-9.4 9.4-3.4-3.4-2.1 2.1 5.5 5.5 11.5-11.5z" transform="translate(1 1)"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <div class="logo-text-main">FairHomeQuotes</div>
+      <div class="logo-text-sub">Get Free Quotes</div>
+    </div>
+  </a>
+</nav>
+
+<!-- SUCCESS SECTION -->
+<div class="success-wrapper">
+  <div class="success-card">
+    <!-- Success Icon -->
+    <div class="success-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <!-- Heading -->
+    <h1 class="success-title">We've Got Your Request!</h1>
+
+    <!-- Message -->
+    <p class="success-message">
+      Thank you for providing your information. We're connecting you with vetted local contractors who serve your area.
+    </p>
+
+    <!-- Details Box -->
+    <div class="success-details">
+      <div class="detail-item">
+        <div class="detail-check">✓</div>
+        <div class="detail-text"><strong>Request confirmed</strong> — Your project details have been received.</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-check">✓</div>
+        <div class="detail-text"><strong>Contractor matching in progress</strong> — We're finding qualified contractors in your area.</div>
+      </div>
+      <div class="detail-item">
+        <div class="detail-check">✓</div>
+        <div class="detail-text"><strong>You'll hear soon</strong> — Contractors typically reach out within 24–48 hours.</div>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="cta-section">
+      <a href="/" class="cta-primary">Get More Quotes</a>
+      <button class="cta-secondary" onclick="window.history.back()">Go Back</button>
+    </div>
+
+    <!-- Footer Note -->
+    <div class="footer-note">
+      Questions? <a href="https://fairhomequotes.com/#contact">Contact us</a> or review our <a href="https://fairhomequotes.com/terms">Terms of Service</a>.
+    </div>
+  </div>
+</div>
+
+<script>
+  // Track conversion completion in Meta Pixel
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead', {
+      value: 0.00,
+      currency: 'USD'
+    });
+  }
+
+  // Track conversion completion in Google Analytics
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'generate_lead', {
+      'event_category': 'form_submission',
+      'event_label': 'Form Completed',
+      'conversion_page': 'thank_you'
+    });
+  }
+</script>
+
+</body>
+</html>
