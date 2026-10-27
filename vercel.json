@@ -3,6 +3,10 @@
     {
       "source": "/thank-you",
       "destination": "/thank-you.html"
+    },
+    {
+      "source": "/roofing",
+      "destination": "/roofing.html"
     }
   ]
 }
