@@ -516,10 +516,13 @@ fbq("track", "PageView");
     })
     .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); })
     .then(() => {
-      // Fire conversions before leaving the page
-      if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_category: 'Roofing', content_name: scope.value, value: 0.00, currency: 'USD' });
-      if (typeof gtag !== 'undefined') gtag('event', 'generate_lead', { event_category: 'form_submission', event_label: 'Roofing LP', service: 'Roofing', scope: scope.value, zip_code: payload.zipCode });
-      setTimeout(() => { location.href = '/thank-you'; }, 400);
+      // Hand off to the thank-you page, which fires the Lead / generate_lead events
+      try {
+        sessionStorage.setItem('fhq_roofing_lead', JSON.stringify({
+          firstName: payload.firstName, scope: scope.value, zip: payload.zipCode
+        }));
+      } catch (e) {}
+      location.href = '/roofing/thank-you' + location.search;
     })
     .catch(err => {
       console.error('GHL submission error:', err);
