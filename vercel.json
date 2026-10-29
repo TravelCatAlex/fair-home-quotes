@@ -7,6 +7,10 @@
     {
       "source": "/roofing",
       "destination": "/roofing.html"
+    },
+    {
+      "source": "/roofing/thank-you",
+      "destination": "/roofing-thank-you.html"
     }
   ]
 }
